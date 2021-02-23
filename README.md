@@ -1,26 +1,23 @@
 # VoiceBoxer
-A Unity component to handle sounds. It can group sounds and play them in random order, or in a sequence.
+A Unity Component which allows funny dialogues with gibberish sounds, as seen in some games like *Animal Crossing* or *Celeste*.
 
 ## Package Contents
-The project is divided into 2 folders:
+The project is divided into 3 folders:
 
-**Prefabs** contains the actual prefab (called AudioManager) that should be added to your scene.
+**Prefabs** contains the actual prefab (called VoiceBoxer) that should be added to your scene.
+
+**SFX** contains sounds for each letter of the alphabet and some blank sounds for pauses. This can be replaced with other voices if you like.
 
 **Scripts** contains the code for the component, which should be used as a singleton.
 
 ## Usage
-Just add the AudioManager prefab into your scene, populate it with sounds and call the singleton from your code. There are *three* main functions that you can invoke:
+Just add the VoiceBoxer prefab into your scene, and call the singleton from your code. There are *two* main functions that you can invoke:
 
-**void Play(AudioClip clip, float volume = 1f)** Plays an external AudioClip. 
+**Speak(string letter)** plays a single letter.
 
-    AudioManager.instance.Play(someAudioClip);
+    VoiceBoxer.instance.Speak("A");
 
-**void Play(string groupName)** Plays a random sound from the group.
+**Talk(string text)** calls the *Speak* function multiple times inside a coroutine (for a whole text)
 
-    AudioManager.instance.Play("pickup-coin");
-
-
-**void PlaySequence(string groupName)** Plays the next sound in the group (preserves order).
-
-    AudioManager.instance.PlaySequence("pickup-coin");
+    VoiceBoxer.instance.Talk("Hi, I speak in a funny way.");
 
