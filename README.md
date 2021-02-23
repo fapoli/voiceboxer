@@ -1,5 +1,5 @@
 # VoiceBoxer
-An Unity Component which allows funny dialogues with gibberish sounds, as seen in some games like *Animal Crossing* or *Celeste*.
+A Unity Component which allows funny dialogues with gibberish sounds, as seen in some games like *Animal Crossing* or *Celeste*.
 
 ## Package Contents
 The project is divided into 3 folders:
