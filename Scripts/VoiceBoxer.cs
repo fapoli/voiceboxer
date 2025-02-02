@@ -2,49 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VoiceBoxer : MonoBehaviour
-{
+namespace Fapoli.VoiceBoxer {
+
+public class VoiceBoxer : MonoBehaviour {
     public static VoiceBoxer instance { get; private set; }
 
-    public List<AudioClip> letters;
+    [SerializeField] private List<AudioClip> letters;
 
-    public Dictionary<string, AudioClip> letterMap;
-    private AudioSource audioSource;
 
-    private void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-        letterMap = new Dictionary<string, AudioClip>();
+    private Dictionary<string, AudioClip> _letterMap;
+    private AudioSource _audioSource;
+
+    private void Start() {
+        _audioSource = GetComponent<AudioSource>();
+        _letterMap = new Dictionary<string, AudioClip>();
 
         foreach (var l in letters)
-            letterMap.Add(l.name, l);
+            _letterMap.Add(l.name, l);
 
         instance = this;
     }
 
-    public void Speak(string letter)
-    {
-        if (letterMap.ContainsKey(letter.ToLower()))
-            audioSource.PlayOneShot(letterMap[letter.ToLower()]);
+    public void Speak(string letter) {
+        if (_letterMap.ContainsKey(letter.ToLower()))
+            _audioSource.PlayOneShot(letterMap[letter.ToLower()]);
         else if (letter == ".")
-            audioSource.PlayOneShot(letterMap["longblank"]);
+            _audioSource.PlayOneShot(letterMap["longblank"]);
         else if (letter == " ")
-            audioSource.PlayOneShot(letterMap["blank"]);
+            _audioSource.PlayOneShot(letterMap["blank"]);
     }
 
-    public void Talk(string text)
-    {
+    public void Talk(string text) {
         StartCoroutine(DoTalk(text));
     }
 
-    private IEnumerator DoTalk(string text)
-    {
-        for (var i = 0; i < text.Length; i++)
-        {
+    private IEnumerator DoTalk(string text, float delay = 0.03f) {
+        for (var i = 0; i < text.Length; i++) {
             Speak(text[i].ToString());
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(delay);
         }
     }
-
-
+}
 }

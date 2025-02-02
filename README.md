@@ -17,7 +17,12 @@ Just add the VoiceBoxer prefab into your scene, and call the singleton from your
 
     VoiceBoxer.instance.Speak("A");
 
-**Talk(string text)** calls the *Speak* function multiple times inside a coroutine (for a whole text)
+**Talk(string text, [float delay])** calls the *Speak* function multiple times inside a coroutine (for a whole text)
 
     VoiceBoxer.instance.Talk("Hi, I speak in a funny way.");
+
+## Customization
+You can add some separation between words by passing the optional delay parameter in the *Talk* function. The default value is *0.03*
+
+    VoiceBoxer.instance.Talk("Hi, I speak in a funny way.", 0.05f);
 
